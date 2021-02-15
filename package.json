@@ -2,7 +2,7 @@
   "name": "readme-generator",
   "version": "0.0.0",
   "description": "a tool to generate readme files from a template",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
