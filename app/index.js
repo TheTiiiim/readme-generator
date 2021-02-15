@@ -11,13 +11,14 @@ project title, description, installation instructions, usage information, contri
 
 const questions = [];
 
-function writeToFile(fileName, data) {
-	fileName = path.normalize(fileName);
+function writeToFile(inputPath, data) {
+	inputPath = path.normalize(inputPath);
 
 	// get directory of target file
-	dirName = fileName.split(path.sep);
-	dirName.pop();
-	dirName = dirName.join(path.sep);
+	let dirArray = inputPath.split(path.sep);
+	const fileName = dirArray.pop();
+
+	dirName = dirArray.join(path.sep) + path.sep;
 
 	// ensure directory exists
 	if (!fs.existsSync(dirName)) {
@@ -25,7 +26,12 @@ function writeToFile(fileName, data) {
 	}
 
 	// write file
-	return fsPromises.writeFile(fileName, data, "utf8");
+	return fsPromises.writeFile(inputPath, data, "utf8").then((data) => {
+		return {
+			"fileName": fileName,
+			"path": dirName
+		};
+	});
 }
 
 function init() {
