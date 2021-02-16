@@ -4,10 +4,9 @@ const fs = require("fs");
 const { dirname } = require("path");
 const fsPromises = fs.promises;
 
-`
-project title, description, installation instructions, usage information, contribution guidelines, and test instructions
+const { generateMarkdown, licenses } = require("./utils/generateMarkdown");
 
-`
+// Table of Contents, , License, Contributing, Tests, and Questions
 
 const questions = [
 	{
@@ -78,6 +77,14 @@ function writeToFile(filePath, data) {
 }
 
 function init() {
+
+	inquirer.prompt(questions).then(generateMarkdown)
+		.then((rendered) => {
+			writeToFile("logs/test.md", rendered).then((pathData) => {
+				const { base, dir } = pathData;
+				console.log(`generated README at ${dir + path.sep + base}`)
+			});
+		})
 }
 
 init();
