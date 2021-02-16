@@ -9,27 +9,70 @@ project title, description, installation instructions, usage information, contri
 
 `
 
-const questions = [];
+const questions = [
+	{
+		type: "input",
+		name: "title",
+		message: "Enter your project's title : ",
+	},
+	{
+		type: "input",
+		name: "description",
+		message: "Enter your project's description : ",
+	},
+	{
+		type: "input",
+		name: "installation",
+		message: "Enter your project's installation instructions : ",
+	},
+	{
+		type: "input",
+		name: "usage",
+		message: "Enter your project's usage instructions : ",
+	},
+	{
+		type: "input",
+		name: "contribution",
+		message: "Enter your project's contribution guidelines : ",
+	},
+	{
+		type: "input",
+		name: "test",
+		message: "Enter your project's test instructions : ",
+	},
+	{
+		type: "list",
+		name: "license",
+		message: "Enter your project's license : ",
+		choices: licenses,
+	},
+	{
+		type: "input",
+		name: "githubUser",
+		message: "Enter your github username : ",
+	},
+	{
+		type: "input",
+		name: "email",
+		message: "Enter your email address : ",
+	}
+];
 
-function writeToFile(inputPath, data) {
-	inputPath = path.normalize(inputPath);
+function writeToFile(filePath, data) {
+	filePath = path.normalize(filePath);
 
-	// get directory of target file
-	let dirArray = inputPath.split(path.sep);
-	const fileName = dirArray.pop();
-
-	dirName = dirArray.join(path.sep) + path.sep;
+	const { base, dir } = path.parse(filePath);
 
 	// ensure directory exists
-	if (!fs.existsSync(dirName)) {
-		fs.mkdirSync(dirName);
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir);
 	}
 
 	// write file
-	return fsPromises.writeFile(inputPath, data, "utf8").then((data) => {
+	return fsPromises.writeFile(filePath, data, "utf8").then((data) => {
 		return {
-			"fileName": fileName,
-			"path": dirName
+			"base": base,
+			"dir": dir
 		};
 	});
 }
