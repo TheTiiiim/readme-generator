@@ -6,8 +6,6 @@ const fsPromises = fs.promises;
 
 const { generateMarkdown, licenses } = require("./utils/generateMarkdown");
 
-// Table of Contents, , License, Contributing, Tests, and Questions
-
 const questions = [
 	{
 		type: "input",

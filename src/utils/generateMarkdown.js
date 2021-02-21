@@ -41,7 +41,7 @@ function generateMarkdown(answers) {
 		usage,
 		contribution,
 		test,
-		_badges,
+		license,
 		githubUser,
 		email
 	} = answers;
@@ -52,7 +52,7 @@ function generateMarkdown(answers) {
 
 		// TODO: fill table of contents, put github user & email in question area
 
-		data = data.replace(/_badges/g, getLicenseBadge(_badges));
+		data = data.replace(/_badges/g, getLicenseBadge(license));
 		data = data.replace(/_title/g, title);
 		data = data.replace(/_description/g, description);
 		data = data.replace(/_installation/g, installation);
@@ -60,8 +60,9 @@ function generateMarkdown(answers) {
 		data = data.replace(/_contribution/g, contribution);
 		data = data.replace(/_test/g, test);
 		data = data.replace(/_license/g, license);
-		data = data.replace(/_githubUser/g, githubUser);
-		data = data.replace(/_email/g, email);
+
+		// data = data.replace(/_githubUser/g, githubUser);
+		// data = data.replace(/_email/g, email);
 
 		return data;
 	});
