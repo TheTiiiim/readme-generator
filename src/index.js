@@ -75,10 +75,13 @@ function writeToFile(filePath, data) {
 }
 
 function init() {
-
-	inquirer.prompt(questions).then(generateMarkdown)
+	// get data
+	inquirer.prompt(questions)
+		// render markdwon
+		.then(generateMarkdown)
+		// write to file
 		.then((rendered) => {
-			writeToFile("logs/test.md", rendered).then((pathData) => {
+			writeToFile("output/README.md", rendered).then((pathData) => {
 				const { base, dir } = pathData;
 				console.log(`generated README at ${dir + path.sep + base}`)
 			});

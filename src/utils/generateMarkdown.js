@@ -32,7 +32,6 @@ function getLicenseBadge(licenseName) {
 	}
 }
 
-// TODO: Create a function to generate markdown for README
 function generateMarkdown(answers) {
 	const {
 		title,
@@ -47,11 +46,6 @@ function generateMarkdown(answers) {
 	} = answers;
 
 	return fsPromises.readFile("src/template.md", "utf8").then((data) => {
-
-		// title, Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-
-		// TODO: fill table of contents, put github user & email in question area
-
 		data = data.replace(/_badges/g, getLicenseBadge(license));
 		data = data.replace(/_title/g, title);
 		data = data.replace(/_description/g, description);
@@ -60,9 +54,8 @@ function generateMarkdown(answers) {
 		data = data.replace(/_contribution/g, contribution);
 		data = data.replace(/_test/g, test);
 		data = data.replace(/_license/g, license);
-
-		// data = data.replace(/_githubUser/g, githubUser);
-		// data = data.replace(/_email/g, email);
+		data = data.replace(/_githubUser/g, githubUser);
+		data = data.replace(/_email/g, email);
 
 		return data;
 	});
